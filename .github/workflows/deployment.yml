@@ -1,4 +1,4 @@
-name: Deployment
+name: _deployment
 on:
   workflow_call:
     inputs:
