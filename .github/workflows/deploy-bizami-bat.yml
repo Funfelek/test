@@ -1,24 +1,11 @@
-name: Push Master
+name: Deploy Bizami Bat
 on:
-  workflow_call:
-
+  workflow_dispatch:
 
 jobs:
   test:
     name: Tests
     uses: ./.github/workflows/test.yml
-
-  prod-deployment:
-    name: Femax Prod Deployment
-    needs: [test]
-    uses: ./.github/workflows/deployment.yml
-    with:
-      env: prod-femax
-      branch: master
-      url: femax.bizami.pl
-      user: bizami-femax
-    secrets:
-      deploy_token: ${{secrets.DEPLOY_KEY}}
 
   bizami-bat-deployment:
     name: Bizami Bat Deployment
