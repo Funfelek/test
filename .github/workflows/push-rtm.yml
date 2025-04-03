@@ -6,7 +6,12 @@ on:
 jobs:
   test:
     name: Tests
-    uses: ./.github/workflows/test.yml
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - uses: ./.github/workflows/test.yml
 
   preprod-deployment:
     name: Preprod Deployment
