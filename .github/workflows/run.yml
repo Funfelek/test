@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     if: inputs.environment == 'preprod'
     steps:
+      - uses: actions/checkout@v3
       - name: Deploy Preprod
         run: echo "Deploy Preprod"
       - uses: ./.github/workflows/push-rtm.yml
