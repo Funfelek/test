@@ -28,4 +28,4 @@ jobs:
           fetch-depth: 1
       - name: echo
         run: |
-          echo "Deploying to ${{ inputs.branch }}"
+          echo "Deploying to ${{ inputs.env }}, branch: ${{ inputs.branch }}"
