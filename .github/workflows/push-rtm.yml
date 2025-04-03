@@ -2,7 +2,7 @@ name: Push Rtm
 on:
   workflow_call:
 
-    
+
 jobs:
   test:
     name: Tests

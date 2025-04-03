@@ -14,6 +14,9 @@ on:
 
 jobs:
   print-tag:
-    if: environment == 'preprod'
     runs-on: ubuntu-latest
-    uses: ./.github/workflows/push-rtm.yml
+    if: environment == 'preprod'
+    steps:
+      - name: Deploy Preprod
+        run: echo "Deploy Preprod"
+      - uses: ./.github/workflows/push-rtm.yml
