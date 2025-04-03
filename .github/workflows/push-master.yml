@@ -1,0 +1,45 @@
+name: Push Master
+on:
+  workflow_call:
+
+
+jobs:
+  test:
+    name: Tests
+    uses: ./.github/workflows/test.yml
+
+  prod-deployment:
+    name: Femax Prod Deployment
+    needs: [test]
+    uses: ./.github/workflows/deployment.yml
+    with:
+      env: prod-femax
+      branch: master
+      url: femax.bizami.pl
+      user: bizami-femax
+    secrets:
+      deploy_token: ${{secrets.DEPLOY_KEY}}
+
+  bizami-bat-deployment:
+    name: Bizami Bat Deployment
+    needs: [ test ]
+    uses: ./.github/workflows/deployment.yml
+    with:
+      env: bat-prod
+      branch: master
+      url: bat.bizami.pl
+      user: bizami-bat
+    secrets:
+      deploy_token: ${{secrets.DEPLOY_KEY}}
+
+  bizami-bat-test-deployment:
+    name: Bizami Bat Test Deployment
+    needs: [ test ]
+    uses: ./.github/workflows/deployment.yml
+    with:
+      env: bat-test
+      branch: master
+      url: bat-test.bizami.pl
+      user: bizami-bat-test
+    secrets:
+      deploy_token: ${{secrets.DEPLOY_KEY}}

@@ -1,0 +1,11 @@
+name: Test
+on: workflow_call
+
+jobs:
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: test
+        run: |
+          echo "test done"

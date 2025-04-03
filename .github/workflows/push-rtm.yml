@@ -1,0 +1,57 @@
+name: Push Rtm
+on:
+  workflow_call:
+
+    
+jobs:
+  test:
+    name: Tests
+    uses: ./.github/workflows/test.yml
+
+  preprod-deployment:
+    name: Preprod Deployment
+    needs: [ test ]
+    uses: ./.github/workflows/deployment.yml
+    with:
+      env: preprod-femax
+      branch: rtm
+      url: femax-preprod.bizami.pl
+      user: bizami-femax-preprod
+    secrets:
+      deploy_token: ${{secrets.DEPLOY_KEY}}
+
+  bizami-delta-deployment:
+    name: Bizami Delta Deployment
+    needs: [ test ]
+    uses: ./.github/workflows/deployment.yml
+    with:
+      env: bizami-delta
+      branch: rtm
+      url: delta.bizami.pl
+      user: bizami-delta
+    secrets:
+      deploy_token: ${{secrets.DEPLOY_KEY}}
+
+  bizami-dev-euroterm-deployment:
+    name: Bizami Euroterm Deployment
+    needs: [ test ]
+    uses: ./.github/workflows/deployment.yml
+    with:
+      env: bizami-dev-euroterm
+      branch: rtm
+      url: euroterm.dev.bizami.pl
+      user: bizami-delta
+    secrets:
+      deploy_token: ${{secrets.DEPLOY_KEY}}
+
+  bizami-bat-preprod-deployment:
+    name: Bizami Bat Preprod Deployment
+    needs: [ test ]
+    uses: ./.github/workflows/deployment.yml
+    with:
+      env: bizami-bat-preprod
+      branch: rtm
+      url: bizami-bat-preprod.alekseon-test.eu
+      user: bizami-bat-preprod
+    secrets:
+      deploy_token: ${{secrets.DEPLOY_KEY}}

@@ -1,0 +1,28 @@
+name: Deployment
+on:
+  workflow_call:
+    inputs:
+      env:
+        required: true
+        type: string
+      branch:
+        required: true
+        type: string
+      url:
+        required: false
+        type: string
+      user:
+        required: false
+        type: string
+    secrets:
+      deploy_token:
+        required: true
+
+jobs:
+  deployment:
+    name: Deployment
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo
+        run: |
+          echo "Deploying to ${{ inputs.branch }}"

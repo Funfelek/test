@@ -1,0 +1,19 @@
+name: Run
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment'
+        required: true
+        default: 'preprod'
+        type: choice
+        options:
+          - preprod
+          - prod
+          - prod2
+
+jobs:
+  print-tag:
+    if: environment == 'preprod'
+    runs-on: ubuntu-latest
+    uses: ./.github/workflows/push-rtm.yml
