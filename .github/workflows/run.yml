@@ -1,4 +1,4 @@
-name: Run
+name: "Run :arrow_forward:"
 on:
   workflow_dispatch:
     inputs:
